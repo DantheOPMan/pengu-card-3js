@@ -24,7 +24,7 @@ The site can be deployed as a standard Next.js application. This task only runs 
 
 ## App icon
 
-`public/brand/winter-crown.png` is the transparent 512px project logo, adapted from the ivory crown and ice crystal on the back of the card. Its editable source is `public/brand/winter-crown.svg`. Next.js serves the matching browser favicon, 32px PNG icon and 180px Apple icon from `src/app/`; these are included in Vercel deployments. Run `npm run icons` to regenerate them from the SVG.
+`public/brand/winter-crown.png` is the transparent 512px project logo, matching the back's ivory crown, blue-and-silver contour that curves beneath it, and lower ice crystal within a diamond setting. Its editable source is `public/brand/winter-crown.svg`. Next.js serves the matching browser favicon, 32px PNG icon and 180px Apple icon from `src/app/`; these are included in Vercel deployments. Run `npm run icons` to regenerate them from the SVG.
 
 ## Explore the card
 

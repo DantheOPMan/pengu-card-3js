@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
   <title>Winter Crown</title>
-  <desc>The ivory three-point crown and ice crystal from the Frostbound Lattice card reverse, within a silver-edged blue diamond.</desc>
+  <desc>The Frostbound Lattice emblem: a rounded ivory crown within its blue-and-silver contour, above an ice crystal on a silver-edged blue diamond.</desc>
   <defs>
     <linearGradient id="silver" x1="80" y1="60" x2="420" y2="460" gradientUnits="userSpaceOnUse">
       <stop stop-color="#f0f5f3"/>
@@ -20,14 +20,17 @@
   <path d="M256 24 452 256 256 488 60 256Z" fill="url(#silver)"/>
   <path d="M256 44 434 256 256 468 78 256Z" fill="url(#enamel)"/>
   <path d="M256 64 416 256 256 448 96 256Z" fill="none" stroke="#8dadb9" stroke-opacity=".55" stroke-width="3"/>
-  <path d="M143 318 120 173Q120 166 127 172L191 223 250 125Q256 115 262 125L321 223 385 172Q392 166 392 173L369 318Q256 290 143 318Z" fill="#102838" stroke="#102838" stroke-width="17" stroke-linejoin="round"/>
-  <path d="M143 308 120 163Q120 156 127 162L191 213 250 115Q256 105 262 115L321 213 385 162Q392 156 392 163L369 308Q256 280 143 308Z" fill="url(#ivory)" stroke="#e0eaf0" stroke-width="6" stroke-linejoin="round"/>
-  <path d="M148 307Q256 279 364 307" fill="none" stroke="#8aabb9" stroke-width="8" stroke-linecap="round"/>
-  <path d="M256 192 269 214 256 236 243 214Z" fill="#6e9bb1"/>
-  <path d="M256 197 263 214 256 226 249 214Z" fill="#d5eef4"/>
-  <path d="M169 234 176 247 169 260 162 247ZM343 234 350 247 343 260 336 247Z" fill="#769caa"/>
-  <path d="M256 329 298 372 256 424 214 372Z" fill="#cde9f0" stroke="#7396a8" stroke-width="6" stroke-linejoin="round"/>
-  <path d="M256 329 256 372 214 372Z" fill="#f1fcff"/>
-  <path d="M256 329 298 372 256 372Z" fill="#b3d7e4"/>
-  <path d="M256 372 298 372 256 424Z" fill="#6c9bb3"/>
+  <!-- A continuous blue-and-silver contour hugs all three prongs and cups
+       underneath the crown; this is distinct from the outer diamond setting. -->
+  <path d="M129 310C107 288 99 261 104 235L119 203Q122 186 138 190C156 195 168 233 188 233Q213 231 224 191L238 141Q242 128 256 127Q271 128 275 141L289 191Q300 231 324 233C344 233 356 195 374 190Q390 186 393 203L408 235C413 261 405 288 383 310Q333 355 256 359Q179 355 129 310Z" fill="#193c53" stroke="#102b3c" stroke-width="17" stroke-linejoin="round"/>
+  <!-- Its crystal tip rises into the curved outline, matching the scene. -->
+  <path d="M256 330 298 387 256 442 214 387Z" fill="#cde9f0" stroke="#7396a8" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M256 330 256 387 214 387Z" fill="#f1fcff"/>
+  <path d="M256 330 298 387 256 387Z" fill="#b3d7e4"/>
+  <path d="M256 387 298 387 256 442Z" fill="#6c9bb3"/>
+  <path d="M129 310C107 288 99 261 104 235L119 203Q122 186 138 190C156 195 168 233 188 233Q213 231 224 191L238 141Q242 128 256 127Q271 128 275 141L289 191Q300 231 324 233C344 233 356 195 374 190Q390 186 393 203L408 235C413 261 405 288 383 310Q333 355 256 359Q179 355 129 310Z" fill="none" stroke="url(#silver)" stroke-width="7" stroke-linejoin="round"/>
+  <path d="M145 313 129 204Q131 196 139 204L173 244Q187 258 203 244L228 219 245 142Q248 137 256 137Q264 137 267 142L284 219 309 244Q325 258 339 244L373 204Q381 196 383 204L367 313Q256 279 145 313Z" fill="url(#ivory)" stroke="#dbe5e7" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M145 313Q256 279 367 313" fill="none" stroke="#8aabb9" stroke-width="7" stroke-linecap="round"/>
+  <path d="M147 321Q256 288 365 321" fill="none" stroke="#eef5ef" stroke-width="3"/>
+  <path d="M256 178 268 194 256 211 244 194ZM167 240 179 256 167 273 155 256ZM345 240 357 256 345 273 333 256Z" fill="#b8dce6" stroke="#769caa" stroke-width="3"/>
 </svg>
