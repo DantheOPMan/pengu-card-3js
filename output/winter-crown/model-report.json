@@ -1,8 +1,8 @@
 {
-  "source_meshes": 1504,
+  "source_meshes": 1496,
   "exported_meshes": 13,
-  "vertices": 172570,
-  "triangles": 260455,
+  "vertices": 172452,
+  "triangles": 260251,
   "materials": [
     "Winter silver",
     "Carved ivory",
@@ -14,5 +14,7 @@
     "Cut lettering"
   ],
   "front_reference": "02-winter-crown.png",
-  "back_reference": "05-frostbound-lattice.png"
+  "back_reference": "05-frostbound-lattice.png",
+  "top_center_garnets_per_face": 1,
+  "front_title_icicles": 0
 }

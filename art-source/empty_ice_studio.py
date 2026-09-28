@@ -35,6 +35,22 @@ bpy.ops.object.select_all(action='DESELECT')
 for obj in environment:obj.select_set(True)
 bpy.ops.export_scene.gltf(filepath=str(ROOT/'public/assets/ice-environment.glb'),export_format='GLB',use_selection=True,export_apply=True,export_yup=False)
 
+# Use the current card hardware in the editable exhibition, rather than the
+# historical card embedded in the original environment source.
+for obj in list(bpy.context.scene.objects):
+    if obj.type=='MESH' and obj not in environment:bpy.data.objects.remove(obj,do_unlink=True)
+with bpy.data.libraries.load(str(ROOT/'art-source/winter-crown.blend'),link=False) as (source,target):
+    target.objects=[name for name in source.objects if not name.startswith(('Crystal_','Cold key','Silver rim','Winter Crown preview'))]
+for obj in target.objects:
+    if obj is not None and obj.type=='MESH':
+        bpy.context.collection.objects.link(obj)
+        if obj.name.startswith('Preview original penguin relief'):
+            for v in obj.data.vertices:
+                uv_y=(v.co.y-.10)/2.79+.5
+                t=max(0,min(1,uv_y/.08));edge=t*t*(3-2*t)
+                v.co.x*=2.94/2.79;v.co.y=(v.co.y-.10)*2.94/2.79+.10
+                v.co.z=.183+(v.co.z-.183)*edge
+
 scene=bpy.context.scene
 scene.camera=next(o for o in scene.objects if o.type=='CAMERA' and o.name.startswith('Ice studio'))
 scene.world.color=(.32,.42,.5)

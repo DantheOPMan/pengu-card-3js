@@ -149,7 +149,7 @@ plate('Carved bone crown',crown_pts,0,.20,ivory,.023)
 for side in [1,-1]:
     curve('Crown silver edge',[(x,y,side*.12) for x,y in crown_pts],.017,silver,True)
     diamond('Crown main crystal',0,2.58,side*.155,.145,.235,ice,side)
-    diamond('Crown red foot',0,2.28,side*.21,.068,.105,ruby,side)
+    # The centered edge garnet below is the crown's single red accent.
     for sx in [-1,1]:
         curve('Crown inset arc',[(sx*.12,2.36,side*.15),(sx*.27,2.34,side*.17),(sx*.37,2.43,side*.13)],.014,silver)
 
@@ -269,6 +269,9 @@ for side in [1,-1]:
             obj=bpy.context.object;obj.name='Frost grain';obj.scale=(1.5,.65,.5);obj.data.materials.append(snow)
     for x in [-1.19,-.88,.92,1.21]:
         length=random.uniform(.12,.22)
+        # Keep the front title plaque clear. Consume the same random values so
+        # the existing frost pattern on the reverse remains unchanged.
+        if side==1:continue
         bpy.ops.mesh.primitive_cone_add(vertices=7,radius1=.002,radius2=.025,depth=length,location=(x,2.02-length*.5,side*.25),rotation=(math.pi/2,0,0))
         bpy.context.object.name='Hanging icicle';bpy.context.object.data.materials.append(ice)
 
@@ -276,6 +279,13 @@ for side in [1,-1]:
 for i in range(5):
     bpy.ops.mesh.primitive_ico_sphere_add(subdivisions=1,radius=1,location=(2.14*math.cos(i*2.4),2.18*math.sin(i*2.4),.1))
     obj=bpy.context.object;obj.name='Crystal_%02d'%i;obj.scale=(.045,.12,.045);obj.data.materials.append(ice)
+
+# Validate the title details before consolidating the source objects.
+assert not any(o.name.startswith('Crown red foot') for o in bpy.context.scene.objects)
+front_icicles=[o for o in bpy.context.scene.objects if o.name.startswith('Hanging icicle') and o.location.z>0]
+assert not front_icicles,'Icicles must not cross the front title plaque'
+top_garnets=[o for o in bpy.context.scene.objects if o.name.startswith('Center edge garnet') and o.active_material==ruby and min(v.co.y for v in o.data.vertices)>2.0]
+assert len(top_garnets)==2,'Keep exactly one top-center garnet on each face'
 
 # Keep draw calls bounded: one static casting per material plus five loose shards.
 source_count=len([o for o in bpy.context.scene.objects if o.type=='MESH'])
@@ -310,6 +320,6 @@ for o in bpy.context.scene.objects:
 bpy.ops.export_scene.gltf(filepath=str(ROOT/'public/assets/winter-crown.glb'),export_format='GLB',use_selection=True,export_apply=True,export_yup=False)
 exec((ROOT/'art-source/add_winter_preview.py').read_text(encoding='utf-8-sig'))
 meshes=[o for o in bpy.context.scene.objects if o.type=='MESH' and not o.name.startswith('Preview ')]
-report={'source_meshes':source_count,'exported_meshes':len(meshes),'vertices':sum(len(o.data.vertices) for o in meshes),'triangles':sum(len(p.vertices)-2 for o in meshes for p in o.data.polygons),'materials':[m.name for m in materials],'front_reference':'02-winter-crown.png','back_reference':'05-frostbound-lattice.png'}
+report={'source_meshes':source_count,'exported_meshes':len(meshes),'vertices':sum(len(o.data.vertices) for o in meshes),'triangles':sum(len(p.vertices)-2 for o in meshes for p in o.data.polygons),'materials':[m.name for m in materials],'front_reference':'02-winter-crown.png','back_reference':'05-frostbound-lattice.png','top_center_garnets_per_face':1,'front_title_icicles':0}
 (ROOT/'output/winter-crown/model-report.json').write_text(json.dumps(report,indent=2))
 print('WINTER_CROWN_EXPORTED',json.dumps(report))

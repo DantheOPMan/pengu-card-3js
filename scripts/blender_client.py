@@ -14,7 +14,7 @@ async def main():
             await session.initialize()
             if len(sys.argv) > 1:
                 code = Path(sys.argv[1]).read_text(encoding='utf-8')
-                result = await session.call_tool('execute_blender_code', {'code': code, 'user_prompt': 'Delete the side pillars and the small ice chunks at their bases. Keep the original empty ice floor, background and card.'})
+                result = await session.call_tool('execute_blender_code', {'code': code, 'user_prompt': 'Fix the double red gems at the top of the Winter Crown card and remove the front icicles that clash with its title. Preserve the rest of the card and ice setting.'})
             else:
                 result = await session.call_tool('get_scene_info', {'user_prompt': 'Inspect the isolated Blender session for the requested holographic card.'})
             output = result.model_dump(mode='json')

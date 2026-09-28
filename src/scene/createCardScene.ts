@@ -111,7 +111,7 @@ export function createCardScene(canvas: HTMLCanvasElement): CardScene {
       textures.push(texture);
       return texture;
     });
-    const modelPromise = new GLTFLoader().loadAsync('/assets/winter-crown.glb').then(gltf => {
+    const modelPromise = new GLTFLoader().loadAsync('/assets/winter-crown.glb?v=clean-title-1').then(gltf => {
       if(disposed) { disposeGraph(gltf.scene); return null; }
       card.add(gltf.scene);
       const detached: THREE.Object3D[] = [];
