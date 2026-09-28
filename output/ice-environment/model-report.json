@@ -1,0 +1,13 @@
+{
+  "design": "Original ice studio, empty floor and background",
+  "source": "C:\\Users\\socce\\OneDrive\\Documents\\ClientWebsites\\Practice Sites\\frost-card-next\\art-source\\winter-crown-ice-studio.blend",
+  "meshes": 38,
+  "vertices": 5167,
+  "triangles": 9764,
+  "removed_side_meshes": 24,
+  "side_meshes": 0,
+  "preserved_meshes": 38,
+  "preserved_geometry_hashes_match": true,
+  "floor_y": -2.6,
+  "floating_objects": 0
+}

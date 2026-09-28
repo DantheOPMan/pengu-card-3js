@@ -1,0 +1,14 @@
+{
+  "edition": "Winter Crown / Frostbound Lattice (back option 5)",
+  "date": "2026-09-28",
+  "build": "npm run build: passed compilation, TypeScript and static generation",
+  "preview": "http://127.0.0.1:4215/",
+  "browser": "Codex in-app browser, production build",
+  "runtime_errors": [],
+  "verified": ["front and reverse render", "flip both ways", "Moonlight / Aurora / Candlelight selection", "enchantment slider updates", "light direction slider updates", "auto orbit movement", "reset restores defaults", "keyboard rotation", "390px mobile framing without horizontal overflow"],
+  "screenshots": ["front-desktop.png", "back-desktop.png"],
+  "source": "art-source/winter-crown.blend",
+  "runtime_model": "public/assets/winter-crown.glb",
+  "original_artwork_sha256": "a761af792f51ebacb69746c84877f1f1b680857273bdfcf30a21c0f117f4f120",
+  "scope": "Modeled interpretation of the selected concepts. Original penguin remains a displaced relief rather than a fully sculpted character."
+}

@@ -1,0 +1,21 @@
+{
+  "date": "2026-09-28T13:12:57.7204282-04:00",
+  "scope": "Back lattice consistency refinement",
+  "blender_mcp_export": "passed",
+  "continuous_field_coverage": true,
+  "cells": 49,
+  "shared_edges": 80,
+  "crown_center": [
+    0,
+    0
+  ],
+  "served_export_sha256": "09C0CFC7CB156C50D209C7B4C25368759FD6149E766DCE9394B569888F122344",
+  "browser_errors": [],
+  "visual_checks": [
+    "Complete repeating field and edge motifs",
+    "Centered raised crown",
+    "Desktop and narrow viewport",
+    "Front relief retained"
+  ],
+  "screenshot": "back-consistent-lattice.png"
+}

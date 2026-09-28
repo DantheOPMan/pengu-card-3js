@@ -1,0 +1,14 @@
+{
+  "name": "frost-card-next",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev --hostname 127.0.0.1 --port 4215",
+    "build": "next build",
+    "start": "next start --hostname 127.0.0.1 --port 4215",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": { "next": "16.3.4", "react": "19.2.8", "react-dom": "19.2.8", "three": "0.183.2" },
+  "devDependencies": { "@types/node": "^24.0.0", "@types/react": "^19.0.0", "@types/react-dom": "^19.0.0", "@types/three": "^0.183.0", "typescript": "5.9.3" }
+}

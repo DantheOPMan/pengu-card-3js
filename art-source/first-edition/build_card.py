@@ -1,0 +1,118 @@
+"""Reproducible card hardware. Sent to the isolated Blender session over MCP.
+Coordinates intentionally match Three.js: XY face, +Z front, 1 unit = card width/3.2.
+"""
+import bpy
+import math
+from mathutils import Vector
+
+ROOT = 'C:/Users/socce/OneDrive/Documents/ClientWebsites/Practice Sites/frost-card-next'
+for obj in list(bpy.context.scene.objects):
+    bpy.data.objects.remove(obj, do_unlink=True)
+
+def material(name, color, metallic, roughness):
+    mat = bpy.data.materials.new(name)
+    mat.diffuse_color = (*color, 1)
+    mat.use_nodes = True
+    node = mat.node_tree.nodes.get('Principled BSDF')
+    node.inputs['Base Color'].default_value = (*color, 1)
+    node.inputs['Metallic'].default_value = metallic
+    node.inputs['Roughness'].default_value = roughness
+    return mat
+
+silver = material('Palladium brushed edges', (.57,.67,.72), .95, .24)
+dark = material('Obsidian anodized core', (.022,.035,.05), .8, .30)
+gold = material('Champagne inset', (.8,.62,.31), .9, .23)
+ice = material('Glacier crystal', (.2,.65,.78), .4, .15)
+
+def outline(w,h,r,steps=14):
+    points=[]
+    for cx,cy,start in [(w/2-r,h/2-r,0),(-w/2+r,h/2-r,90),(-w/2+r,-h/2+r,180),(w/2-r,-h/2+r,270)]:
+        for i in range(steps+1):
+            angle=math.radians(start+i*90/steps)
+            points.append((cx+r*math.cos(angle),cy+r*math.sin(angle)))
+    return points
+
+def ring(name,w,h,r,width,z,depth,mat):
+    outer=outline(w,h,r)
+    inner=outline(w-2*width,h-2*width,max(.02,r-width))
+    n=len(outer)
+    verts=[(x,y,z+d) for d in [-depth/2,depth/2] for loop in [outer,inner] for x,y in loop]
+    faces=[]
+    for i in range(n):
+        j=(i+1)%n
+        faces.extend([(i,j,n+j,n+i),(2*n+i,3*n+i,3*n+j,2*n+j),(i,2*n+i,2*n+j,j),(n+i,n+j,3*n+j,3*n+i)])
+    mesh=bpy.data.meshes.new(name); mesh.from_pydata(verts,[],[tuple(reversed(face)) for face in faces]); mesh.update()
+    obj=bpy.data.objects.new(name,mesh); bpy.context.collection.objects.link(obj); obj.data.materials.append(mat)
+    bevel=obj.modifiers.new('Machined soft edges','BEVEL'); bevel.width=min(width*.2,.009); bevel.segments=3
+    normal=obj.modifiers.new('Weighted reflections','WEIGHTED_NORMAL')
+    return obj
+
+def box(name,location,scale,mat,bevel=.025):
+    bpy.ops.mesh.primitive_cube_add(size=1,location=location)
+    obj=bpy.context.object; obj.name=name; obj.dimensions=scale
+    bpy.ops.object.transform_apply(location=False,rotation=False,scale=True)
+    obj.data.materials.append(mat)
+    mod=obj.modifiers.new('Precision bevel','BEVEL'); mod.width=bevel; mod.segments=5
+    obj.modifiers.new('Weighted reflections','WEIGHTED_NORMAL')
+    return obj
+
+box('Card core',(0,0,0),(3.15,4.55,.115),dark,.105)
+ring('Outer palladium bezel',3.20,4.60,.18,.055,.035,.19,silver)
+ring('Front polished fillet',3.09,4.49,.14,.022,.143,.03,silver)
+ring('Front gold hairline',3.025,4.425,.115,.010,.147,.012,gold)
+ring('Reverse polished fillet',3.09,4.49,.14,.022,-.084,.023,silver)
+ring('Artwork window',2.88,2.89,.095,.019,.163,.028,silver).location.y=.18
+ring('Artwork gold inlay',2.825,2.835,.075,.009,.175,.015,gold).location.y=.18
+
+for side in [-1,1]:
+    for i in range(45):
+        y=-1.82+i*.083
+        box('Milled edge %s %02d'%(side,i),(side*1.578,y,.0),(.016,.024,.115),silver,.005)
+    for y in [-2.12,2.12]:
+        bpy.ops.mesh.primitive_uv_sphere_add(segments=16,ring_count=8,radius=.036,location=(side*1.44,y,.156))
+        obj=bpy.context.object; obj.name='Rivet'; obj.scale.z=.4; obj.data.materials.append(gold)
+
+def rod(name,a,b,radius,mat):
+    delta=Vector(b)-Vector(a)
+    bpy.ops.mesh.primitive_cylinder_add(vertices=10,radius=radius,depth=delta.length,location=(Vector(a)+Vector(b))/2)
+    obj=bpy.context.object; obj.name=name
+    obj.rotation_euler=delta.to_track_quat('Z','Y').to_euler(); obj.data.materials.append(mat)
+    return obj
+
+# An actual raised snowflake seal, used on the reverse face.
+for i in range(6):
+    angle=i*math.pi/3
+    def polar(radius, offset=0):
+        return (radius*math.cos(angle+offset),radius*math.sin(angle+offset),-.15)
+    rod('Snowflake main',polar(.0),polar(.55),.018,silver)
+    for radius in [.27,.42]:
+        anchor=Vector(polar(radius))
+        for direction in [-1,1]:
+            end=anchor+Vector((math.cos(angle+direction*.85)*.15,math.sin(angle+direction*.85)*.15,0))
+            rod('Snowflake branch',anchor,end,.012,gold)
+
+# Detachable facets: the frontend animates these independently of the card.
+for i in range(7):
+    bpy.ops.mesh.primitive_ico_sphere_add(subdivisions=1,radius=1,location=(0,0,0))
+    obj=bpy.context.object; obj.name='Crystal_%02d'%i
+    obj.scale=(.10+(i%2)*.06,.21+(i%3)*.055,.10)
+    obj.data.materials.append(ice)
+    obj.location=(2.2*math.cos(i*2.4),2.4*math.sin(i*2.4),.1)
+
+# Source presentation camera; runtime lighting is owned by Three.js.
+bpy.ops.object.camera_add(location=(0,0,9))
+camera=bpy.context.object; camera.name='Source preview camera'
+camera.rotation_euler=(0,0,0); bpy.context.scene.camera=camera
+camera.rotation_euler=(Vector((0,0,0))-camera.location).to_track_quat('-Z','Y').to_euler()
+for name,location,energy,size in [('Key',(-3,4,5),650,5),('Rim',(3,0,3),420,3)]:
+    bpy.ops.object.light_add(type='AREA',location=location)
+    light=bpy.context.object; light.name=name; light.data.energy=energy; light.data.shape='DISK'; light.data.size=size
+    light.rotation_euler=(-light.location).to_track_quat('-Z','Y').to_euler()
+
+bpy.context.scene.world.color=(.08,.08,.08)
+bpy.ops.object.select_all(action='DESELECT')
+for obj in bpy.context.scene.objects:
+    if obj.type=='MESH': obj.select_set(True)
+bpy.ops.export_scene.gltf(filepath=ROOT+'/public/assets/card-hardware.glb',export_format='GLB',use_selection=True,export_apply=True,export_yup=False)
+bpy.ops.wm.save_as_mainfile(filepath=ROOT+'/art-source/frost-king.blend')
+print('CARD_EXPORTED',len([o for o in bpy.context.scene.objects if o.type=='MESH']),'meshes')

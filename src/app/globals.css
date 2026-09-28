@@ -1,0 +1,52 @@
+@font-face {
+  font-family: 'IM Fell English';
+  src: url('/fonts/IMFellEnglish-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+:root {
+  color-scheme: light;
+  background: #c1d1da;
+  color: #243a46;
+  font-family: Arial, Helvetica, sans-serif;
+  font-synthesis: none;
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+button { font: inherit; color: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+button:disabled { opacity: .4; cursor: wait; }
+button:focus-visible, canvas:focus-visible { outline: 1px solid #c3d9e1; outline-offset: 6px; }
+::selection { background: #566068; color: white; }
+.exhibition {
+  min-height: 100svh;
+  display: grid;
+  grid-template-rows: 86px minmax(360px, 1fr) 72px;
+  position: relative;
+  background: #c1d1da;
+  isolation: isolate;
+}
+.exhibition-title { padding: 29px 40px 0; position: relative; z-index: 1; }
+.exhibition-title h1 { margin: 0; font: 400 27px/1.1 'IM Fell English', Georgia, serif; letter-spacing: -.02em; }
+.card-stage { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; z-index: -1; }
+.webgl-canvas { display: block; width: 100%; height: 100%; cursor: grab; touch-action: pan-y; opacity: 0; transition: opacity .6s ease; }
+.is-ready .webgl-canvas { opacity: 1; }
+.loading-state { position: absolute; inset: 0; display: grid; place-content: center; font-size: 12px; color: #385260; }
+.error-state { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 16px; padding: 30px; text-align: center; }
+.error-state img { width: 150px; border-radius: 4px; }
+.error-state p { max-width: 340px; font-size: 14px; line-height: 1.6; }
+.error-state button { background: none; border: 1px solid #666d69; padding: 10px 22px; }
+.exhibition-footer { grid-row: 3; padding: 0 40px 20px; display: flex; align-items: center; justify-content: space-between; gap: 24px; pointer-events: none; }
+.exhibition-footer p { margin: 0; color: #385260; font-size: 12px; }
+.orbit-button { min-height: 44px; display: inline-flex; align-items: center; gap: 10px; padding: 8px 0 8px 14px; background: none; border: none; font-size: 12px; color: #2e4856; pointer-events: auto; }
+.orbit-button:hover, .orbit-button[aria-pressed='true'] { color: #122933; }
+.orbit-button[aria-pressed='true'] span { text-decoration: underline; text-underline-offset: 5px; text-decoration-color: #788985; }
+@media (max-width: 600px) {
+  .exhibition { grid-template-rows: 76px minmax(320px, 1fr) 68px; }
+  .exhibition-title { padding: 25px 24px 0; }
+  .exhibition-title h1 { font-size: 25px; }
+  .exhibition-footer { padding: 0 24px 14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}

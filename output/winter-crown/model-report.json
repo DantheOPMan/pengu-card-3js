@@ -1,0 +1,18 @@
+{
+  "source_meshes": 1504,
+  "exported_meshes": 13,
+  "vertices": 172570,
+  "triangles": 260455,
+  "materials": [
+    "Winter silver",
+    "Carved ivory",
+    "Oxidized recess",
+    "Glacial enamel",
+    "Rock crystal",
+    "Burgundy enamel",
+    "Frost deposits",
+    "Cut lettering"
+  ],
+  "front_reference": "02-winter-crown.png",
+  "back_reference": "05-frostbound-lattice.png"
+}
