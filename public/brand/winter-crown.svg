@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <title>Winter Crown</title>
+  <desc>The ivory three-point crown and ice crystal from the Frostbound Lattice card reverse, within a silver-edged blue diamond.</desc>
+  <defs>
+    <linearGradient id="silver" x1="80" y1="60" x2="420" y2="460" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f0f5f3"/>
+      <stop offset=".45" stop-color="#b4c9d0"/>
+      <stop offset="1" stop-color="#678896"/>
+    </linearGradient>
+    <linearGradient id="enamel" x1="170" y1="80" x2="350" y2="460" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#315c77"/>
+      <stop offset="1" stop-color="#102a3b"/>
+    </linearGradient>
+    <linearGradient id="ivory" x1="220" y1="140" x2="270" y2="324" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff9e6"/>
+      <stop offset="1" stop-color="#d8d6c4"/>
+    </linearGradient>
+  </defs>
+  <path d="M256 14 462 256 256 498 50 256Z" fill="#152e3f" stroke="#152e3f" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M256 24 452 256 256 488 60 256Z" fill="url(#silver)"/>
+  <path d="M256 44 434 256 256 468 78 256Z" fill="url(#enamel)"/>
+  <path d="M256 64 416 256 256 448 96 256Z" fill="none" stroke="#8dadb9" stroke-opacity=".55" stroke-width="3"/>
+  <path d="M143 318 120 173Q120 166 127 172L191 223 250 125Q256 115 262 125L321 223 385 172Q392 166 392 173L369 318Q256 290 143 318Z" fill="#102838" stroke="#102838" stroke-width="17" stroke-linejoin="round"/>
+  <path d="M143 308 120 163Q120 156 127 162L191 213 250 115Q256 105 262 115L321 213 385 162Q392 156 392 163L369 308Q256 280 143 308Z" fill="url(#ivory)" stroke="#e0eaf0" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M148 307Q256 279 364 307" fill="none" stroke="#8aabb9" stroke-width="8" stroke-linecap="round"/>
+  <path d="M256 192 269 214 256 236 243 214Z" fill="#6e9bb1"/>
+  <path d="M256 197 263 214 256 226 249 214Z" fill="#d5eef4"/>
+  <path d="M169 234 176 247 169 260 162 247ZM343 234 350 247 343 260 336 247Z" fill="#769caa"/>
+  <path d="M256 329 298 372 256 424 214 372Z" fill="#cde9f0" stroke="#7396a8" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M256 329 256 372 214 372Z" fill="#f1fcff"/>
+  <path d="M256 329 298 372 256 372Z" fill="#b3d7e4"/>
+  <path d="M256 372 298 372 256 424Z" fill="#6c9bb3"/>
+</svg>
