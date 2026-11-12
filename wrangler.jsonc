@@ -1,0 +1,13 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "pengu-card-3js",
+  "compatibility_date": "2026-11-01",
+  // No Worker script: the static export in ./out is served as static assets (free, no request limit).
+  "assets": {
+    "directory": "./out",
+    "not_found_handling": "404-page"
+  },
+  // workers.dev and per-version preview URLs stay on for testing; _headers marks them noindex.
+  "workers_dev": true,
+  "preview_urls": true
+}

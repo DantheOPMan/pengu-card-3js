@@ -1,6 +1,8 @@
 node_modules/
 .npm-cache/
 .next/
+out/
+.wrangler/
 *.tsbuildinfo
 output/*
 !output/concepts/

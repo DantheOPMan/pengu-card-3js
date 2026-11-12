@@ -1,0 +1,9 @@
+# Cloudflare static-asset headers (next.config headers() don't apply to a static export).
+
+# Next's hashed build files never change: keep them for a year, as Vercel did.
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# workers.dev addresses (the default one and every preview version) stay out of search results.
+https://:version.:subdomain.workers.dev/*
+  X-Robots-Tag: noindex
